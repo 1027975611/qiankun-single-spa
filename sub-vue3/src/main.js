@@ -23,7 +23,7 @@ function render(props = {}) {
     })
     app = createApp(App);
     let { container } = props
-    app.use(router).mount(container ? container.querySelector('#app') : '#app')
+    app.use(router).mount(container ? container.querySelector('#sub-vue3') : '#sub-vue3')
 }
 // qiankun在渲染前提供了一个变量 window.__POWERED_BY_QIANKUN__
 if (!window.__POWERED_BY_QIANKUN__) {// 独立运行
