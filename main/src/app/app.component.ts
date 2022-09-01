@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
    ngOnInit(): void {
     this.registerMicroApps();
 
-    setDefaultMountApp('/sub-angular');
+    // setDefaultMountApp('/sub-angular');
 
     start();
 
@@ -30,6 +30,12 @@ export class AppComponent implements OnInit {
           entry: '//localhost:7401',
           container: '#subapp-viewport',
           activeRule: '/sub-angular',
+        },
+        {
+          name: 'sub-vue3',
+          entry: '//localhost:7402',
+          container: '#subapp-viewport',
+          activeRule: '/sub-vue3',
         },
       ],
       {
