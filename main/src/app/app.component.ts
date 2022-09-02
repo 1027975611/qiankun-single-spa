@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
         },
         {
           name: 'sub-react',
-          entry: '//localhost:3000',
+          entry: '//localhost:7403',
           container: '#subapp-viewport',
           activeRule: '/sub-react',
         },

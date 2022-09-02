@@ -228,6 +228,9 @@ module.exports = function (webpackEnv) {
               .replace(/\\/g, '/')
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+      globalObject: "window",
+      library: 'sub-react',//命名自己决定（可随意命名）
+      libraryTarget: 'umd'
     },
     cache: {
       type: 'filesystem',
@@ -285,6 +288,7 @@ module.exports = function (webpackEnv) {
               // Turned on because emoji and regex is not minified properly using default
               // https://github.com/facebook/create-react-app/issues/2488
               ascii_only: true,
+             
             },
           },
         }),
