@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const root = null // 记录当前创建的 应用
+let root = null // 记录当前创建的 应用
 function render(props) {
   const { container } = props;
    root = ReactDOM.createRoot(container ? container.querySelector('#root') : document.querySelector('#root'));
