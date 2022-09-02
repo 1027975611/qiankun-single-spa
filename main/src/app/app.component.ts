@@ -43,6 +43,12 @@ export class AppComponent implements OnInit {
           container: '#subapp-viewport',
           activeRule: '/sub-react',
         },
+        {
+          name: 'sub-html',
+          entry: '//10.3.6.32:7799',
+          container: '#subapp-viewport',
+          activeRule: '/sub-html',
+        },
       ],
       {
         beforeLoad: [
