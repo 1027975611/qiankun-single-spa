@@ -37,6 +37,12 @@ export class AppComponent implements OnInit {
           container: '#subapp-viewport',
           activeRule: '/sub-vue3',
         },
+        {
+          name: 'sub-react',
+          entry: '//localhost:3000',
+          container: '#subapp-viewport',
+          activeRule: '/sub-react',
+        },
       ],
       {
         beforeLoad: [
