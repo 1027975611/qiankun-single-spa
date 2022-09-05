@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { setDefaultMountApp, start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
-
+import microApps from '../micro-app'
+import store from '../store'
 
 
 @Component({
@@ -9,10 +10,12 @@ import { setDefaultMountApp, start, runAfterFirstMounted, registerMicroApps } fr
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
+  microApps = microApps
+  current = null
+  state: any = store.getGlobalState()
    ngOnInit(): void {
-    this.registerMicroApps();
+     this.registerMicroApps(microApps);
 
-    // setDefaultMountApp('/sub-angular');
 
     start();
 
@@ -22,34 +25,8 @@ export class AppComponent implements OnInit {
   }
 
   /** 注册子项目 */
-  registerMicroApps(): void {
-    registerMicroApps(
-      [
-        {
-          name: 'sub-angular',
-          entry: '//localhost:7401',
-          container: '#subapp-viewport',
-          activeRule: '/sub-angular',
-        },
-        {
-          name: 'sub-vue3',
-          entry: '//localhost:7402',
-          container: '#subapp-viewport',
-          activeRule: '/sub-vue3',
-        },
-        {
-          name: 'sub-react',
-          entry: '//localhost:7403',
-          container: '#subapp-viewport',
-          activeRule: '/sub-react',
-        },
-        {
-          name: 'sub-html',
-          entry: '//10.3.6.32:7799',
-          container: '#subapp-viewport',
-          activeRule: '/sub-html',
-        },
-      ],
+  registerMicroApps(apps:any): void {
+    registerMicroApps(apps,
       {
         beforeLoad: [
           app => {
@@ -72,4 +49,9 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
+  goto(item:any){
+    history.pushState(null, item.activeRule, item.activeRule)
+    this.current = item.activeRule
+   }
 }
