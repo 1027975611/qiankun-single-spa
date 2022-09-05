@@ -50,7 +50,12 @@ export class AppComponent implements OnInit {
     );
   }
 
-  goto(item:any){
+  goto(item?:any){
+    if (!item){
+      this.current = null
+      history.pushState(null, '', '/')
+      return
+    }
     history.pushState(null, item.activeRule, item.activeRule)
     this.current = item.activeRule
    }

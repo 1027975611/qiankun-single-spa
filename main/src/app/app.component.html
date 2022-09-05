@@ -1,6 +1,6 @@
 <div class="layout-wrapper">
   <a style="display: inline-block;width: 80px;height: 80px;position: absolute;top: 0;right: 0;z-index: 1;"
-    href="https://github.com/fengxianqi/qiankun-example" class="github-corner" aria-label="View source on GitHub">
+    href="https://github.com/1027975611/qiankun-single-spa#readme" class="github-corner" aria-label="View source on GitHub">
     <svg width="80" height="80" viewBox="0 0 250 250"
       style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
       <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -13,17 +13,19 @@
     </svg>
   </a>
   <div class="layout-header">
-    <div class="logo">QIANKUN-EXAMPLE</div>
+    <div class="logo" (click)="goto()" [ngClass]="{'active': !current}"><a >QIANKUN-MAIN</a></div>
     <ul class="sub-apps">
       <li *ngFor="let item of microApps" [ngClass]="{'active': item.activeRule === current}"  (click)="goto(item)">
         {{ item.name }}</li>
     </ul>
-    <div class="userinfo">主应用的state：{{ state |json }}</div>
+    <div class="userinfo">主应用的全局state：{{ state |json }}</div>
   </div>
   <div id="subapp-viewport"></div>
 </div>
+<div *ngIf="!current">
+  你好！我是主应用
 <router-outlet></router-outlet>
-
+</div>
 <!--子应用渲染容器-->
 <main id="subapp-container">
   <div id="subapp-viewport"></div>
