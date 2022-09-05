@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
   goto(item?:any){
     if (!item){
       this.current = null
-      history.pushState(null, '', '/')
+      history.pushState(null, 'main', '/')
       return
     }
     history.pushState(null, item.activeRule, item.activeRule)
