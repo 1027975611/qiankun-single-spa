@@ -49,13 +49,15 @@ const openSubVue = () => {
     window.open(window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__)
 }
 
-const setGlobalState = useActions(['setGlobalState'], 'global')
-
+// const setGlobalState = useActions(['setGlobalState'], 'global')
 const changeUsername = () => {
     // 也可通过 store.commit('global/setGlobalState', { user: '李四' }) 进行操作
-    setGlobalState({
+    store.commit('global/setGlobalState', {
         user: { name: '李四' + Math.round(Math.random() * 100) },
     })
+    // setGlobalState({
+    //     user: { name: '李四' + Math.round(Math.random() * 100) },
+    // })
 }
 </script>
 

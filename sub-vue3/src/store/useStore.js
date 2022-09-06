@@ -9,14 +9,14 @@ import { mapState, mapGetters, mapMutations, mapActions, useStore } from 'vuex'
  */
 const hooks = (mapperFn, mapper, module) => {
     const store = useStore();  // 引入vuex中的useStore函数
-    const resultFn = {};
+    let resultFn = {};
     let mapData = {};
     if (module) {  // 判断是否存在命名空间，如果存在则绑定
         mapData = mapperFn(module, mapper);
     } else {
         mapData = mapperFn(mapper);
     }
-    Object.keys(mapData).forEach(item => {
+    Object.keys(mapData).map(item => {
         const fn = mapData[item].bind({ '$store': store });  // 使用bind方法将得到map函数结果绑定到vuex上
         resultFn[item] = fn;
     });
@@ -77,6 +77,6 @@ export const useMutations = (mapper, module) => {
  * @param mapper  数组，actions中函数的名称
  * @param module  命名空间，模块名称
  */
-export const useActions = (mapper, module) => {
+export const  useActions = (mapper, module) => {
     return hooks(mapActions, mapper, module);
 };

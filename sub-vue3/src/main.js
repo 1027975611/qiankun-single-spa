@@ -9,7 +9,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue'
 import routes from './router'
-import { registerGlobalModule } from './store/global-register'
+import {registerGlobalModule} from './store/global-register'
 import store from './store'
 
 // 不能直接挂载，需要切换的时候调用mount方法时再去挂载
