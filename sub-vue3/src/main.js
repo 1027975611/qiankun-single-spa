@@ -18,7 +18,10 @@ let history;
 let router;
 let app;
 function render(props = {}) {
-    history = createWebHistory('/sub-vue3');
+    // createWebHistory() // 没有 base，应用托管在域名 `https://example.com` 的根目录下。
+    // createWebHistory('/folder/') // 给出的网址为 `https://example.com/folder/`
+    // history = createWebHistory('/sub-vue3');
+    history = createWebHistory();
     router = createRouter({
         history,
         routes
