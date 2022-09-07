@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { setDefaultMountApp, start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
-import microApps from '../micro-app'
-import store from '../store'
+import { start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
+import microApps  from '../micro-app'
+import actions from '../shared/actions'
 
-
-@Component({
+ @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
+  constructor(
+     ) { }
   microApps = microApps
   current = null
-  state: any = store.getGlobalState()
+   state: any = null
    ngOnInit(): void {
-     this.registerMicroApps(microApps);
-
-
+     this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
+   }
+  ngAfterViewInit(): void {
+    this.registerMicroApps(microApps);
     start();
-
     runAfterFirstMounted(() => {
       console.log('[MainApp] first app mounted');
     });
   }
-
   /** 注册子项目 */
   registerMicroApps(apps:any): void {
     registerMicroApps(apps,
@@ -58,5 +58,11 @@ export class AppComponent implements OnInit {
     }
     history.pushState(null, item.activeRule, item.activeRule)
     this.current = item.activeRule
+   }
+
+  editStore(){
+    actions.setGlobalState({
+      user: 'main' + Math.round(Math.random() * 100),
+   });
    }
 }

@@ -9,7 +9,7 @@ const SUBAPPALL = {
   TEST: {
     SUB_VUE: '//localhost:7402' ,
     SUB_REACT: '//localhost:7403',
-    SUB_HTML: '//10.3.6.32:7799',
+    SUB_HTML: '//10.3.6.32:7404',
     SUB_ANGULAR: '//localhost:7401',
   },
   RC: {

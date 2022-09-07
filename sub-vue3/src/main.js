@@ -4,7 +4,7 @@
 // import store from './store'
 
 // createApp(App).use(store).use(router).mount('#app')
-
+import './public-path';
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue'
@@ -12,16 +12,19 @@ import routes from './router'
 import {registerGlobalModule} from './store/global-register'
 import store from './store'
 
+
 // 不能直接挂载，需要切换的时候调用mount方法时再去挂载
 // createApp(App).use(router).mount('#app')
 let history;
 let router;
 let app;
 function render(props = {}) {
+    if (props) {
+        // 注入 actions 实例
+     }
     // createWebHistory() // 没有 base，应用托管在域名 `https://example.com` 的根目录下。
     // createWebHistory('/folder/') // 给出的网址为 `https://example.com/folder/`
-    // history = createWebHistory('/sub-vue3');
-    history = createWebHistory();
+     history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/sub-vue3' : '/');
     router = createRouter({
         history,
         routes
@@ -46,13 +49,18 @@ export async function bootstrap() {
     console.log('vue3 app bootstraped')
 }
 export async function mount(props) {
-    registerGlobalModule(store, props)
+    // props.setGlobalState({
+    //     micro:'Vue应用加载完成'
+    // })
+    // registerGlobalModule(store, props)
     render(props)
 }
 export async function unmount() {
     console.log('vue3 app unmount')
-    history = null;
+    app.unmount();
+    app._container.innerHTML = '';
     app = null;
-    router = null
+    router = null;
+    history.destroy();
 }
 

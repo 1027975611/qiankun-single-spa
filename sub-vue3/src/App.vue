@@ -11,7 +11,7 @@
             </p>
             <p>
                 vuex的`global module`的user state：<code>
-                    {{ JSON.stringify(storeState.user.value) }}</code
+                    {{ JSON.stringify(storeState.data) }}</code
                 >
             </p>
         </div>
@@ -29,16 +29,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, Ref, reactive } from 'vue'
 import { useState, useActions } from './store/useStore'
 import { useStore } from 'vuex'
-
-const store = useStore()
-const storeState = useState(['user'], 'global')
-const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
-const gotoSubReact = () => {
-    history.pushState(null, 'sub-react', '/sub-react')
-}
+import actions from '@/shared/actions'
 
 const openSubVue = () => {
     if (!isInQiankun) {
@@ -49,16 +43,45 @@ const openSubVue = () => {
     window.open(window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__)
 }
 
-const setGlobalState = useActions(['setGlobalState'], 'global')
+const store = useStore()
+const storeState = reactive({
+    data: {},
+})
+// 注册观察者函数
+// onGlobalStateChange 第二个参数为 true，表示立即执行一次观察者函数
+actions.onGlobalStateChange(state => {
+    console.log(state)
+    storeState.data = state
+    // const { token } = state
+    // 未登录 - 返回主页
+    // if (!token) {
+    //     return router.push('/')
+    // }
+}, true)
+const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
+const gotoSubReact = () => {
+    history.pushState(null, 'sub-react', '/sub-react')
+}
+
+// const setGlobalState = useActions(['setGlobalState'], 'global')
 const changeUsername = () => {
     // 也可通过 store.commit('global/setGlobalState', { user: '李四' }) 进行操作
     // store.commit('global/setGlobalState', {
     //     user: { name: '李四' + Math.round(Math.random() * 100) },
     // })
-    setGlobalState({
-        user: { name: '李四' + Math.round(Math.random() * 100) },
+    // setGlobalState({
+    //     user: { name: '李四' + Math.round(Math.random() * 100) },
+    // })
+    actions.setGlobalState({
+        user: 'vue3' + Math.round(Math.random() * 100),
     })
 }
+
+// const getUserInfo = async token => {
+//     // ApiGetUserInfo 是用于获取用户信息的函数
+//     const result = await ApiGetUserInfo(token)
+//     this.userInfo = result.data.getUserInfo
+// }
 </script>
 
 <style lang="less">

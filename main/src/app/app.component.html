@@ -24,6 +24,8 @@
 </div>
 <div *ngIf="!current">
   你好！我是主应用
+ <div><a  style="color: green;" (click)="editStore()">修改主应用数据</a></div>
+ <!-- <div>{{state.user.name}}</div> -->
   <router-outlet></router-outlet>
 </div>
 <!--子应用渲染容器-->
