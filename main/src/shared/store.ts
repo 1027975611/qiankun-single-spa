@@ -21,6 +21,7 @@ const reducer = (state: State = {}, action: Action): State => {
         token: action.payload,
       };
   }
+
 };
 
 const store = createStore<State, Action, unknown, unknown>(reducer);

@@ -6,13 +6,12 @@
         </div>
         <div>
             <p>
-                当前处于<code>{{ isInQiankun ? 'qiankun' : '独立运行' }}</code
+                当前处于<code>{{ isInQiankun ? 'qiankun' : '独立运行' }}</code>
                 >环境
             </p>
             <p>
-                vuex的`global module`的user state：<code>
-                    {{ JSON.stringify(storeState.data) }}</code
-                >
+                vuex的`global module`的user state：
+                <code>{{ token }}</code>
             </p>
         </div>
         <div class="btns">
@@ -29,11 +28,10 @@
 </template>
 
 <script setup>
-import { computed, Ref, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useState, useActions } from './store/useStore'
-import { useStore } from 'vuex'
-import actions from '@/shared/actions'
-
+// import { useStore } from 'vuex'
+import SharedModule from '@/shared'
 const openSubVue = () => {
     if (!isInQiankun) {
         alert('当前已经是单独运行的子应用')
@@ -43,21 +41,13 @@ const openSubVue = () => {
     window.open(window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__)
 }
 
-const store = useStore()
-const storeState = reactive({
-    data: {},
-})
-// 注册观察者函数
-// onGlobalStateChange 第二个参数为 true，表示立即执行一次观察者函数
-actions.onGlobalStateChange(state => {
-    console.log(state)
-    storeState.data = state
-    // const { token } = state
-    // 未登录 - 返回主页
-    // if (!token) {
-    //     return router.push('/')
-    // }
-}, true)
+// const store = useStore()
+const shared = SharedModule.getShared()
+// 使用 shared 获取 token
+let token = ref(shared.getToken())
+// const storeState = reactive({
+//     data: {},
+// })
 const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
 const gotoSubReact = () => {
     history.pushState(null, 'sub-react', '/sub-react')
@@ -72,9 +62,9 @@ const changeUsername = () => {
     // setGlobalState({
     //     user: { name: '李四' + Math.round(Math.random() * 100) },
     // })
-    actions.setGlobalState({
-        user: 'vue3' + Math.round(Math.random() * 100),
-    })
+    let newToken = 'Vue设置的token' + Math.round(Math.random() * 100)
+    shared.setToken(newToken)
+    token.value = shared.getToken()
 }
 
 // const getUserInfo = async token => {

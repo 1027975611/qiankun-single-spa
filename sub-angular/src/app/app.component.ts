@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { assetUrl } from 'src/single-spa/asset-url';
-import actions from "../shared/actions";
-@Component({
+import SharedModule from '../shared'
+
+ @Component({
   selector: 'app1-root', // 此处不能和基座项目的根组件选择器相同
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
@@ -10,15 +11,14 @@ export class AppComponent implements OnInit {
   title = 'sub-angular';
   state:any = {}
   strawberry = assetUrl('/img/strawberry.jpg')
+   shared = SharedModule.getShared();
+
   ngOnInit(){
+    console.log(this.shared);
 
-    // 注册观察者函数
-    // onGlobalStateChange 第二个参数为 true，表示立即执行一次观察者函数
-    actions.onGlobalStateChange((state:any) => {
-      this.state = state
-      console.log('csdeskweb-desk获取到信息', state);
-    }, true);
-
+    // 使用 shared 获取 token
+    const token = this.shared.getToken();
+    console.log('token',token);
   }
 
   ngOnDestroy(): void {
@@ -29,10 +29,6 @@ export class AppComponent implements OnInit {
   }
 
   edit(){
-    let state = { user: 'angular' + Math.round(Math.random() * 100), }
-    actions.setGlobalState(state)
-    // singleSpaPropsSubject.subscribe(async (props: any) => {
-    //   props.setGlobalState(state);
-    // });
+    this.shared.setToken('55555555555555');
   }
 }
