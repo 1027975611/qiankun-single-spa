@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
 import microApps  from '../micro-app'
-import actions from '../shared/actions'
+import shared from "../shared";
+import { ActivatedRoute, Router, Params } from '@angular/router'
 
  @Component({
   selector: 'app-root',
@@ -10,12 +11,14 @@ import actions from '../shared/actions'
 })
 export class AppComponent implements OnInit {
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
      ) { }
   microApps = microApps
    current:any = document.location.pathname
    state: any = null
    ngOnInit(): void {
-     this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
+    //  this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
    }
   ngAfterViewInit(): void {
     this.registerMicroApps(microApps);
@@ -52,7 +55,7 @@ export class AppComponent implements OnInit {
 
   goto(item?:any){
     if (!item){
-      this.current = null
+      this.current = '/'
       history.pushState(null, 'main', '/')
       return
     }
@@ -61,8 +64,11 @@ export class AppComponent implements OnInit {
    }
 
   editStore(){
-    actions.setGlobalState({
-      user: 'main' + Math.round(Math.random() * 100),
-   });
+  //   actions.setGlobalState({
+  //     user: 'main' + Math.round(Math.random() * 100),
+  //  });
+    this.current = '/sub-vue3'
+    this.router.navigate(['/sub-vue3'])
+    shared.setToken('111111233232323');
    }
 }
