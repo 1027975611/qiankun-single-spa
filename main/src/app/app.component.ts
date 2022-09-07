@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(
      ) { }
   microApps = microApps
-  current = null
+   current:any = document.location.pathname
    state: any = null
    ngOnInit(): void {
      this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
