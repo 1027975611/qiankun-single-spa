@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
-import microApps  from '../micro-app'
-import shared from "../shared";
+import microApps  from 'src/micro-app'
+import actions from "src/shared";
 import { ActivatedRoute, Router, Params } from '@angular/router'
+// import { ActionsService } from 'src/api/actions.service';
  @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,12 +13,19 @@ export class AppComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
+    // public store:ActionsService
      ) { }
    microApps = microApps
    current:any = document.location.pathname
-   state: any = shared.getToken()
+   state: any = null
+   value:string = ''
    ngOnInit(): void {
-
+     actions.onGlobalStateChange((newState) => {
+       this.state = newState
+       this.changeDetectorRef.markForCheck();
+       this.changeDetectorRef.detectChanges();
+      },true)
      //  this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
    }
   ngAfterViewInit(): void {
@@ -64,16 +72,12 @@ export class AppComponent implements OnInit {
    }
 
   editStore(){
-  //   actions.setGlobalState({
-  //     user: 'main' + Math.round(Math.random() * 100),
-  //  });
-    this.current = '/sub-vue3'
-    this.router.navigate(['/sub-vue3'])
-    shared.setToken('111111233232323');
+    actions.setGlobalState({mainuser:this.value});
+    this.current = '/sub-angular'
+    this.router.navigate(['/sub-angular'])
     }
 
    edit(){
-     let token= 'Vue设置的token' + Math.round(Math.random() * 100)
-     shared.setToken(token);
-   }
+     actions.setGlobalState({ mainuser: this.value });
+     }
 }

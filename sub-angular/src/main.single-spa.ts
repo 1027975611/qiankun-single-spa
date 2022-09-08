@@ -10,7 +10,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { singleSpaPropsSubject } from './single-spa/single-spa-props';
 
-import SharedModule from './shared'
+import actions from './shared'
 
 if (environment.production) {
   enableProdMode();
@@ -33,12 +33,15 @@ if (!(window as any).__POWERED_BY_QIANKUN__) {
 
 const lifecycles = singleSpaAngular({
   bootstrapFunction: (singleSpaProps:any) => {
-    // 当传入的 shared 为空时，使用子应用自身的 shared
-    // 当传入的 shared 不为空时，主应用传入的 shared 将会重载子应用的 shared
-    const { shared = SharedModule.getShared() } = singleSpaProps;
-    SharedModule.overloadShared(shared);
-
-    console.log(singleSpaProps);
+    // // 当传入的 shared 为空时，使用子应用自身的 shared
+    // // 当传入的 shared 不为空时，主应用传入的 shared 将会重载子应用的 shared
+    // const { shared = SharedModule.getShared() } = singleSpaProps;
+    // SharedModule.overloadShared(shared);
+    // 注入 actions 实例
+    if (singleSpaProps) {
+      // 注入 actions 实例
+      actions.setActions(singleSpaProps);
+    }
 
     singleSpaPropsSubject.next(singleSpaProps);
     return platformBrowserDynamic(getSingleSpaExtraProviders()).bootstrapModule(AppModule);

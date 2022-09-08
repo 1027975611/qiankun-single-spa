@@ -305,8 +305,9 @@
 </style>
 
 <div class="content" role="main">
+    {{state| json}}
+  <input [(ngModel)]="value">
   <div > <a (click)="edit()">修改全局数据</a> </div>
-  {{state| json}}
   <!-- Resources -->
   <h2>Resources</h2>
   <p>Here are some links to help you get started:</p>

@@ -18,13 +18,13 @@
       <li *ngFor="let item of microApps" [ngClass]="{'active': item.activeRule === current}"  (click)="goto(item)">
         {{ item.name }}</li>
     </ul>
-    <a (click)="edit()">主应用修改数据</a>
     <div class="userinfo">主应用的全局state：{{ state |json }}</div>
-  </div>
+   </div>
   <div id="subapp-viewport"></div>
 </div>
+<input [(ngModel)]="value">
+<a  (click)="edit()" style="margin-bottom: 16px;" >主应用修改数据</a>
 <div *ngIf="current==='/'">
- <input type="text" >
  <button (click)="editStore()">登录</button>
  <!-- <div>{{state.user.name}}</div> -->
   <router-outlet></router-outlet>
