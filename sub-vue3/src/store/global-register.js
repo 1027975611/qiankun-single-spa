@@ -11,14 +11,10 @@ export default function registerGlobalModule(store, props = {}) {
     return;
   }
   // 获取初始化的state
-  let initState = {
+  let initState = props.onGlobalStateChange && props.onGlobalStateChange((newState) => newState, true)||{
     mainuser: null
   };
-  if (props.onGlobalStateChange){
-    props.onGlobalStateChange((newState) => {
-       initState = newState
-    }, true)
-  }
+
    // 将父应用的数据存储到子应用中，命名空间固定为global
   if (!store.hasModule('global')) {
     const globalModule = {
