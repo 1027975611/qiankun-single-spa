@@ -1,4 +1,4 @@
-import { enableProdMode, NgZone } from '@angular/core';
+import { enableProdMode, NgZone, ViewEncapsulation } from '@angular/core';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Router, NavigationStart } from '@angular/router';
@@ -14,6 +14,21 @@ import SharedModule from './shared'
 
 if (environment.production) {
   enableProdMode();
+}
+// angular 应用单独运行
+if (!(window as any).__POWERED_BY_QIANKUN__) {
+  const render = () => {
+    return platformBrowserDynamic().bootstrapModule(AppModule, {
+      defaultEncapsulation: ViewEncapsulation.Emulated,
+    }).then((res) => {
+      if ((<any>window).appBootstrap) {
+        (<any>window).appBootstrap();
+      }
+      return res;
+    });
+  };
+
+  render();
 }
 
 const lifecycles = singleSpaAngular({
@@ -33,6 +48,7 @@ const lifecycles = singleSpaAngular({
   NavigationStart,
   NgZone,
  });
+
 
 export const bootstrap = lifecycles.bootstrap;
 export const mount = lifecycles.mount;
