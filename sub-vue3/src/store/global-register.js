@@ -5,18 +5,21 @@
  * @param {qiankun下发的props} props 
  */
 
-export function registerGlobalModule(store, props = {}) {
+export default function registerGlobalModule(store, props = {}) {
 
   if (!store || !store.hasModule) {
     return;
   }
   // 获取初始化的state
-  const initState = props.getGlobalState && props.getGlobalState() || {
-    menu: [],
-    user: {}
+  let initState = {
+    mainuser: null
   };
-  console.log(props.getGlobalState());
-  // 将父应用的数据存储到子应用中，命名空间固定为global
+  if (props.onGlobalStateChange){
+    props.onGlobalStateChange((newState) => {
+       initState = newState
+    }, true)
+  }
+   // 将父应用的数据存储到子应用中，命名空间固定为global
   if (!store.hasModule('global')) {
     const globalModule = {
       namespaced: true,
@@ -25,7 +28,7 @@ export function registerGlobalModule(store, props = {}) {
         // 子应用改变state并通知父应用
         setGlobalState({ commit }, payload) {
           commit('setGlobalState', payload);
-          // commit('emitGlobalState', payload);
+          commit('emitGlobalState', payload);
         },
         // 初始化，只用于mount时同步父应用的数据
         initGlobalState({ commit }, payload) {
@@ -34,9 +37,6 @@ export function registerGlobalModule(store, props = {}) {
       },
       mutations: {
         setGlobalState(state, payload) {
-          if (props.setGlobalState) {
-            props.setGlobalState(state);
-          }
           // eslint-disable-next-line
           state = Object.assign(state, payload);
           

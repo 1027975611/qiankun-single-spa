@@ -11,7 +11,7 @@
             </p>
             <p>
                 vuex的`global module`的user state：
-                <code>{{ token }}</code>
+                <code>{{ JSON.stringify(storeState.mainuser.value) }}</code>
             </p>
         </div>
         <div class="btns">
@@ -30,8 +30,9 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { useState, useActions } from './store/useStore'
-// import { useStore } from 'vuex'
-import SharedModule from '@/shared'
+const storeState = useState(['mainuser'], 'global')
+
+const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
 const openSubVue = () => {
     if (!isInQiankun) {
         alert('当前已经是单独运行的子应用')
@@ -41,37 +42,16 @@ const openSubVue = () => {
     window.open(window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__)
 }
 
-// const store = useStore()
-const shared = SharedModule.getShared()
-// 使用 shared 获取 token
-let token = ref(shared.getToken())
-// const storeState = reactive({
-//     data: {},
-// })
-const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
+const setGlobalState = useActions(['setGlobalState'], 'global')
+const changeUsername = () => {
+    setGlobalState({
+        mainuser: { name: '李四' + Math.round(Math.random() * 100) },
+    })
+}
+
 const gotoSubReact = () => {
     history.pushState(null, 'sub-react', '/sub-react')
 }
-
-// const setGlobalState = useActions(['setGlobalState'], 'global')
-const changeUsername = () => {
-    // 也可通过 store.commit('global/setGlobalState', { user: '李四' }) 进行操作
-    // store.commit('global/setGlobalState', {
-    //     user: { name: '李四' + Math.round(Math.random() * 100) },
-    // })
-    // setGlobalState({
-    //     user: { name: '李四' + Math.round(Math.random() * 100) },
-    // })
-    let newToken = 'Vue设置的token' + Math.round(Math.random() * 100)
-    shared.setToken(newToken)
-    token.value = shared.getToken()
-}
-
-// const getUserInfo = async token => {
-//     // ApiGetUserInfo 是用于获取用户信息的函数
-//     const result = await ApiGetUserInfo(token)
-//     this.userInfo = result.data.getUserInfo
-// }
 </script>
 
 <style lang="less">

@@ -35,7 +35,7 @@
 
 import { initGlobalState, MicroAppStateActions } from "qiankun";
 
-const initialState = {};
+const initialState = { mainuser:null};
 const actions: MicroAppStateActions = initGlobalState(initialState);
 
 export default actions;

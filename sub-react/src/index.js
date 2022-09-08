@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import actions from './shared'
 let root = null // 记录当前创建的 应用
 function render(props) {
   const { container } = props;
@@ -32,12 +33,7 @@ export async function bootstrap() {
  */
 export async function mount(props) {
   console.log('基座下发的能力：', props);
-
-  // 可通过 props.getGlobalState() 获取基座下发的数据
-
-  // props.setGlobalState({user: {name: ''}}) 改变全局的数据
-
-  // props.onGlobalStateChange 监听全局数据的变化
+  actions.setActions(props);
   render(props);
 }
 /**
