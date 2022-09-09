@@ -5,7 +5,7 @@ rm -rf ./dist
 mkdir ./dist
 mkdir ./dist/subapp
 
-# sub-react子应用
+# sub-angular子应用
 cp -r ./sub-angular/build/ ./dist/subapp/sub-angular/
 
 # sub-react子应用

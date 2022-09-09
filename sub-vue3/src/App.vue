@@ -30,9 +30,17 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { useState, useActions } from './store/useStore'
+/**
+ * 读取 vuex中 global 模块的 mainuser 数据
+ */
 const storeState = useState(['mainuser'], 'global')
-
+/**
+ * 是否是作为微应用启动
+ */
 const isInQiankun = computed(() => window.__POWERED_BY_QIANKUN__)
+/**
+ * 打开窗口 独立运行
+ */
 const openSubVue = () => {
     if (!isInQiankun) {
         alert('当前已经是单独运行的子应用')
@@ -41,14 +49,22 @@ const openSubVue = () => {
     // window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ 是qiankun注入的子应用对应的地址，谨慎使用，生产环境建议将跳转地址维护在环境变量中
     window.open(window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__)
 }
-
+/**
+ * 结构出  setGlobalState 函数
+ */
 const setGlobalState = useActions(['setGlobalState'], 'global')
+/**
+ *修改 主数据  mainuser  中的 数据
+ */
 const changeUsername = () => {
     setGlobalState({
         mainuser: { name: '李四' + Math.round(Math.random() * 100) },
     })
 }
 
+/**
+ * 跳转到 react 微应用
+ */
 const gotoSubReact = () => {
     history.pushState(null, 'sub-react', '/sub-react')
 }
