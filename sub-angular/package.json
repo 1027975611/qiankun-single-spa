@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:single-spa:sub-angular": "ng build sub-angular --prod --deploy-url http://localhost:7401/",
-    "start:single-spa:sub-angular": "ng s --project sub-angular --disable-host-check --port 7401 --deploy-url http://localhost:7401/ --live-reload false"
+    "build:single-spa:sub-angular": "ng build sub-angular --prod",
+    "start:single-spa:sub-angular": "ng s --project sub-angular --disable-host-check --port 7401  --live-reload false"
   },
   "private": true,
   "dependencies": {

@@ -1,3 +1,4 @@
+import './public-path';
 import { enableProdMode, NgZone, ViewEncapsulation } from '@angular/core';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
