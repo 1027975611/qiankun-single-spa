@@ -19,13 +19,11 @@ npm start
 ```
 
 通过 [http://localhost:7400/](http://localhost:7400/) 访问主应用。
-也可单独访问独立的子应用 子应用端口号 
-```
+也可单独访问独立的子应用 子应用端口号: 
 angular [http://localhost:7401/](http://localhost:7401/)
 vue [http://localhost:7402/](http://localhost:7402/)
 react [http://localhost:7403/](http://localhost:7403/)
 html [http://localhost:7404/](http://localhost:7404/)
-```
 
 ## 发布
 一键构建并打包所有主子应用
