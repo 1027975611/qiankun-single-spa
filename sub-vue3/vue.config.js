@@ -2,7 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 const { name } = require('./package');
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: "//localhost:7402",   // 保证子应用静态资源都像是20000端口上发送的
+  publicPath: "/subapp/sub-vue3",   //打包后的访问路径
   devServer: {
     port: 7402,
     headers: {

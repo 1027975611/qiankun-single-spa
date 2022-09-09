@@ -1,5 +1,8 @@
 import { SUBAPP } from './global-configuration'
 // import shared from "./shared";
+
+//activeRule 不能和微应用的真实访问路径一样
+//微应用的真实访问路径就是微应用的 entry
 const microApps= [
   {
     name: 'sub-vue3',
@@ -27,7 +30,9 @@ const apps= microApps.map(item => {
   return {
     ...item,
     container: '#subapp-viewport', // 子应用挂载的div
-    // props: { shared }, // 通过 props 将 shared 传递给子应用
+    props: {
+      routerBase: item.activeRule, // 下发基础路由
+     }, // 通过 props 将 shared 传递给子应用
    }
 })
 

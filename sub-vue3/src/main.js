@@ -12,19 +12,20 @@ import commonStore from './store/global-register'
 let router;
 let app;
 function render(props = {}) {
+    const { container, routerBase } = props
     // 当传入的 shared 为空时，使用子应用自身的 shared
     // 当传入的 shared 不为空时，主应用传入的 shared 将会重载子应用的 shared
     // const { shared = SharedModule.getShared() } = props;
     // SharedModule.overloadShared(shared);
     // createWebHistory() // 没有 base，应用托管在域名 `https://example.com` 的根目录下。
     // createWebHistory('/folder/') // 给出的网址为 `https://example.com/folder/`
-     history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/sub-vue3' : '/');
+    //BASE_URL  vue.config.js 中的 publicPath
+    history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? routerBase : process.env.BASE_URL);
     router = createRouter({
         history,
         routes
     })
     app = createApp(App);
-    let { container } = props
     app.use(store)
     app.use(router)
     .mount(container ? container.querySelector('#sub-vue3') : '#sub-vue3')

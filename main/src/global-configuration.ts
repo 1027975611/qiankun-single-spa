@@ -4,13 +4,19 @@ type SUBAPP ={
   SUB_HTML: string | null,
   SUB_ANGULAR: string | null,
 }
-
+// 采用 同一域名 下时  此时需要设置微应用构建时的 publicPath 和 history 模式的路由 base，然后才能打包放到对应的目录里。
 const SUBAPPALL = {
-  TEST: {
-    SUB_VUE: '//localhost:7402' ,
-    SUB_REACT: '//localhost:7403',
+  LOCAL: {
+    SUB_VUE: '//localhost:7402/subapp/sub-vue3/' ,
+    SUB_REACT: '//localhost:7403/subapp/sub-react/',
     SUB_HTML: '//localhost:7404',
-    SUB_ANGULAR: '//localhost:7401',
+    SUB_ANGULAR: '//localhost:7401/subapp/sub-angular/',
+  },
+  TEST: {
+    SUB_VUE: '//qiankun.com/subapp/sub-vue3/' ,
+    SUB_REACT: '//qiankun.com/subapp/sub-react/',
+    SUB_HTML: '//qiankun.com/subapp/sub-html/',
+    SUB_ANGULAR: '//qiankun.com/subapp/sub-angular/',
   },
   RC: {
     SUB_VUE: null,
@@ -36,17 +42,17 @@ let SUBAPP: SUBAPP = {
 let url
 let protocolStr = document.location.protocol
 const domain = window.location.host
-var net = new RegExp('.uniondrug.net')
-var cn = new RegExp('.uniondrug.cn')
+var net = new RegExp('.net')
+var cn = new RegExp('.cn')
+var TEST = new RegExp('.test')
 if (net.test(domain)) {
   SUBAPP = SUBAPPALL.RC
-  // url = protocolStr + '//wx.uniondrug.net'
-} else if (cn.test(domain)) {
+ } else if (cn.test(domain)) {
   SUBAPP = SUBAPPALL.PROD
-  // url = protocolStr + '//wx.uniondrug.cn'
-} else {
+ } else if (TEST.test(domain)) {
   SUBAPP = SUBAPPALL.TEST
-  // url = protocolStr + '//wx.turboradio.cn'
+ }else {
+  SUBAPP = SUBAPPALL.LOCAL
 }
 
 export  { url, SUBAPP }

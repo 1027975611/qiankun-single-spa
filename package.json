@@ -21,7 +21,7 @@
         "build:sub-vue": "cd sub-vue3 && npm run build",
         "build:sub-angular": "cd sub-angular && npm run build:single-spa:sub-angular",
         "build:main": "cd main && npm run build",
-        "build:html": "cd html && npm run build",
+        "build:sub-html": "cd sub-html && npm run build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
