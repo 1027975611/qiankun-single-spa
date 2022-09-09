@@ -14,9 +14,9 @@ const SUBAPPALL = {
     SUB_ANGULAR: '//localhost:7401/',
   },
   TEST: {
-    SUB_VUE: '//qiankun.com/subapp/sub-vue3/' ,
-    SUB_REACT: '//qiankun.com/subapp/sub-react/',
-    SUB_HTML: '//qiankun.com/subapp/sub-html/',
+    SUB_VUE: '//snapshot-finance.turboradio.cn/subapp/sub-vue3/' ,
+    SUB_REACT: '//snapshot-finance.turboradio.cn/subapp/sub-react/',
+    SUB_HTML: '//snapshot-finance.turboradio.cn/subapp/sub-html/',
     SUB_ANGULAR: '//qiankun.angular.com/',
   },
   RC: {
@@ -43,9 +43,9 @@ let SUBAPP: SUBAPP = {
 let url
 let protocolStr = document.location.protocol
 const domain = window.location.host
-var net = new RegExp('.net')
-var cn = new RegExp('.cn')
-var TEST = new RegExp('.test')
+var net = new RegExp('uniondrug.net')
+var cn = new RegExp('uniondrug.cn')
+var TEST = new RegExp('turboradio.cn')
 if (net.test(domain)) {
   SUBAPP = SUBAPPALL.RC
  } else if (cn.test(domain)) {
