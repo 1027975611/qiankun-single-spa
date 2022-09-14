@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:single-spa:sub-angular": "ng build sub-angular --prod",
+    "build:single-spa:sub-angular": "ng build sub-angular --prod --deploy-url /subapp/sub-angular --output-hashing none",
     "start:single-spa:sub-angular": "ng s --project sub-angular --disable-host-check --port 7401  --live-reload false"
   },
   "private": true,

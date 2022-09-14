@@ -17,7 +17,7 @@ const SUBAPPALL = {
     SUB_VUE: '//snapshot-finance.turboradio.cn/subapp/sub-vue3/' ,
     SUB_REACT: '//snapshot-finance.turboradio.cn/subapp/sub-react/',
     SUB_HTML: '//snapshot-finance.turboradio.cn/subapp/sub-html/',
-    SUB_ANGULAR: '//qiankun.angular.com/',
+    SUB_ANGULAR: '//snapshot-finance.turboradio.cn/subapp/sub-angular/',
   },
   RC: {
     SUB_VUE: null,

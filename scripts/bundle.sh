@@ -5,10 +5,8 @@ rm -rf ./dist
 mkdir ./dist
 mkdir ./dist/subapp
 
-# main基座
-cp -r ./main/dist/ ./dist/
 # sub-angular子应用
-cp -r ./sub-angular/build/ ./dist/subapp/sub-angular/
+cp -r ./sub-angular/dist/ ./dist/subapp/sub-angular/
 
 # sub-react子应用
 cp -r ./sub-react/build/ ./dist/subapp/sub-react/
@@ -19,7 +17,8 @@ cp -r ./sub-vue3/dist/ ./dist/subapp/sub-vue3/
 # sub-html子应用
 cp -r ./sub-html/dist/ ./dist/subapp/sub-html/
 
-
+# main基座
+cp -r ./main/dist/ ./dist/
 
 # cd ./dist
 # zip -r mp$(date +%Y%m%d%H%M%S).zip *
