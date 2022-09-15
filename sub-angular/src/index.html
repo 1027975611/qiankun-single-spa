@@ -7,7 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- 也可以使用其他的CDN/本地的包 -->
-  <script src="/assets/zone.js"></script>
+  <!-- <script src="/assets/zone.js"></script> -->
+  <script>
+      (function (){
+        if(!window.__POWERED_BY_QIANKUN__){
+          var domain = document.location.host;
+           var _QIANKUN = document.createElement("script");
+          if (/localhost/.test(domain)) {
+            _QIANKUN.src = "/assets/zone.js";
+          }else{
+            _QIANKUN.src = "/subapp/sub-angular/assets/zone.js";
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(_QIANKUN, s);
+        }
+        })()
+  </script>
 </head>
 <body>
   <app1-root></app1-root>
