@@ -1154,3 +1154,20 @@ send(){
       }
       </style>
       ```
+
+## 三 打包部署 
+
+### [场景 1：主应用和微应用部署到同一个服务器（同一个 IP 和端口）](https://qiankun.umijs.org/zh/cookbook#%E5%9C%BA%E6%99%AF-1%E4%B8%BB%E5%BA%94%E7%94%A8%E5%92%8C%E5%BE%AE%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8C%E4%B8%80%E4%B8%AA-ip-%E5%92%8C%E7%AB%AF%E5%8F%A3)
+
+### [场景 2：主应用和微应用部署在不同的服务器，使用 Nginx 代理访问](https://qiankun.umijs.org/zh/cookbook#%E5%9C%BA%E6%99%AF-2%E4%B8%BB%E5%BA%94%E7%94%A8%E5%92%8C%E5%BE%AE%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8-nginx-%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE)
+
+
+
+
+
+##### [qiankun上线稳定，问题解决汇总](https://www.shouxicto.com/article/4005.html)
+
+[1：`boax-sizing` 样式污染 。2：`子应用播放器报错`,](https://juejin.cn/post/7091594061328580645)
+
+
+
