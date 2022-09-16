@@ -9,7 +9,7 @@ const SUBAPPALL = {
   LOCAL: {
     SUB_VUE: '//localhost:7402/subapp/sub-vue3/' ,
     SUB_REACT: '//localhost:7403/subapp/sub-react/',
-    SUB_HTML: '//localhost:7404',
+    SUB_HTML: '//localhost:7404/',
     SUB_ANGULAR: '//localhost:7401/',
   },
   TEST: {
@@ -19,10 +19,10 @@ const SUBAPPALL = {
     SUB_ANGULAR: '//localhost:8080/subapp/sub-angular/',
   },
   RC: {
-    SUB_VUE: '//localhost:8081/subapp/sub-vue3/',
-    SUB_REACT: '//localhost:8082/subapp/sub-react/',
-    SUB_HTML: '//localhost:8083/subapp/sub-html/',
-    SUB_ANGULAR: '//localhost:8084/subapp/sub-angular/',
+    SUB_VUE: '/subapp/sub-vue3/',
+    SUB_REACT: '/subapp/sub-react/',
+    SUB_HTML: '/subapp/sub-html/',
+    SUB_ANGULAR: '/subapp/sub-angular/',
   },
   PROD: {
     SUB_VUE: null,
@@ -42,7 +42,7 @@ let SUBAPP: SUBAPP = {
 let url
 let protocolStr = document.location.protocol
 const domain = window.location.host
-var net = new RegExp(':8081')
+var net = new RegExp(':8000')
 var cn = new RegExp('.cn')
 var TEST = new RegExp(':8080')
 if (net.test(domain)) {
