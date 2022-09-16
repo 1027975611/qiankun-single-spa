@@ -1,2 +1,0 @@
-"use strict";(self["webpackJsonp_sub-vue3"]=self["webpackJsonp_sub-vue3"]||[]).push([[443],{7381:function(n,s,u){u.r(s),u.d(s,{default:function(){return f}});var e=u(3396);const t={class:"about"},a=(0,e._)("h1",null,"This is an about page",-1),r=[a];function c(n,s){return(0,e.wg)(),(0,e.iD)("div",t,r)}var o=u(89);const i={},b=(0,o.Z)(i,[["render",c]]);var f=b}}]);
-//# sourceMappingURL=about.d39582d2.js.map
