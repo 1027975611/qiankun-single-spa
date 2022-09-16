@@ -5,7 +5,6 @@ type SUBAPP ={
   SUB_ANGULAR: string | null,
 }
 // 采用 同一域名 下时  此时需要设置微应用构建时的 publicPath 和 history 模式的路由 base，然后才能打包放到对应的目录里。
-// 每个 Angular 应用程序都应该在一个单独的 repo 中并单独部署
 const SUBAPPALL = {
   LOCAL: {
     SUB_VUE: '//localhost:7402/subapp/sub-vue3/' ,
@@ -14,16 +13,16 @@ const SUBAPPALL = {
     SUB_ANGULAR: '//localhost:7401/',
   },
   TEST: {
-    SUB_VUE: '//snapshot-finance.turboradio.cn/subapp/sub-vue3/' ,
-    SUB_REACT: '//snapshot-finance.turboradio.cn/subapp/sub-react/',
-    SUB_HTML: '//snapshot-finance.turboradio.cn/subapp/sub-html/',
-    SUB_ANGULAR: '//snapshot-finance.turboradio.cn/subapp/sub-angular/',
+    SUB_VUE: '//localhost:8080/subapp/sub-vue3/' ,
+    SUB_REACT: '//localhost:8080/subapp/sub-react/',
+    SUB_HTML: '//localhost:8080/subapp/sub-html/',
+    SUB_ANGULAR: '//localhost:8080/subapp/sub-angular/',
   },
   RC: {
-    SUB_VUE: null,
-    SUB_REACT: null,
-    SUB_HTML: null,
-    SUB_ANGULAR: null,
+    SUB_VUE: '//localhost:8081/subapp/sub-vue3/',
+    SUB_REACT: '//localhost:8082/subapp/sub-react/',
+    SUB_HTML: '//localhost:8083/subapp/sub-html/',
+    SUB_ANGULAR: '//localhost:8084/subapp/sub-angular/',
   },
   PROD: {
     SUB_VUE: null,
@@ -43,9 +42,9 @@ let SUBAPP: SUBAPP = {
 let url
 let protocolStr = document.location.protocol
 const domain = window.location.host
-var net = new RegExp('uniondrug.net')
-var cn = new RegExp('uniondrug.cn')
-var TEST = new RegExp('turboradio.cn')
+var net = new RegExp(':8081')
+var cn = new RegExp('.cn')
+var TEST = new RegExp(':8080')
 if (net.test(domain)) {
   SUBAPP = SUBAPPALL.RC
  } else if (cn.test(domain)) {
