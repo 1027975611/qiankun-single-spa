@@ -18,7 +18,7 @@ cp -r ./sub-vue3/dist/ ./dist/subapp/sub-vue3/
 cp -r ./sub-html/dist/ ./dist/subapp/sub-html/
 
 # main基座
-cp -r ./main/dist/ ./dist/
+cp -r ./main/dist/ ./dist/main
 
 # cd ./dist
 # zip -r mp$(date +%Y%m%d%H%M%S).zip *

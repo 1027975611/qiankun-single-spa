@@ -1,6 +1,8 @@
 const { defineConfig } = require('@vue/cli-service')
 const { name } = require('./package');
 module.exports = defineConfig({
+  //去掉map文件
+  productionSourceMap: false,
   transpileDependencies: true,
   publicPath: "/subapp/sub-vue3",   //打包后的访问路径
   devServer: {
