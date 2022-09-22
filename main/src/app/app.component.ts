@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
+import NProgress from 'nprogress'
 import Apps from 'src/micro-app'
 import actions from "src/shared";
 import { ActivatedRoute, Router, Params } from '@angular/router'
@@ -55,6 +56,8 @@ export class AppComponent implements OnInit {
       {
         beforeLoad: [
           app => {
+             // 加载微应用前，加载进度条
+            NProgress.start();
             console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
             return Promise.resolve();
           },
@@ -63,6 +66,13 @@ export class AppComponent implements OnInit {
           app => {
             console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
             return Promise.resolve();
+          },
+        ],
+        afterMount: [
+          app => {
+            // 加载微应用后，进度条加载完成
+            NProgress.done();
+             return Promise.resolve();
           },
         ],
         afterUnmount: [
