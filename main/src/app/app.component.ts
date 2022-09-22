@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { start, runAfterFirstMounted, registerMicroApps } from 'qiankun'
-import microApps  from 'src/micro-app'
+import Apps from 'src/micro-app'
 import actions from "src/shared";
 import { ActivatedRoute, Router, Params } from '@angular/router'
 // import { ActionsService } from 'src/api/actions.service';
@@ -13,30 +13,44 @@ export class AppComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
-    // public store:ActionsService
-     ) { }
-   microApps = microApps
-   current:any = document.location.pathname
-   state: any = null
-   value:string = ''
-   ngOnInit(): void {
-     actions.onGlobalStateChange((newState) => {
-       this.state = newState
-       this.changeDetectorRef.markForCheck();
-       this.changeDetectorRef.detectChanges();
-      },true)
-     //  this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
-   }
+    private changeDetectorRef: ChangeDetectorRef,
+     // public store:ActionsService
+  ) { }
+  loaderLoading: boolean = true;
+  microApps = Apps
+  current: any = document.location.pathname
+  state: any = null
+  value: string = ''
+  ngOnInit(): void {
+    actions.onGlobalStateChange((newState) => {
+      this.state = newState
+      this.changeDetectorRef.markForCheck();
+      this.changeDetectorRef.detectChanges();
+    }, true)
+    //  this.state =actions.onGlobalStateChange((newState:any) => this.state = newState,true)
+  }
+
   ngAfterViewInit(): void {
-    this.registerMicroApps(microApps);
+    // 增加loading 效果
+    const loader = (loading: boolean) => this.loaderLoading = loading;
+    const apps = Apps.map(item => {
+      return {
+        ...item,
+        container: '#subapp-viewport', // 子应用挂载的div
+        loader,
+        props: {
+          routerBase: item.activeRule, // 下发基础路由
+        }, // 通过 props 将 shared 传递给子应用
+      }
+    })
+    this.registerMicroApps(apps);
     start();
     runAfterFirstMounted(() => {
       console.log('[MainApp] first app mounted');
     });
   }
   /** 注册子项目 */
-  registerMicroApps(apps:any): void {
+  registerMicroApps(apps: any): void {
     registerMicroApps(apps,
       {
         beforeLoad: [
@@ -61,23 +75,23 @@ export class AppComponent implements OnInit {
     );
   }
 
-  goto(item?:any){
-     if (!item){
+  goto(item?: any) {
+    if (!item) {
       this.current = '/'
       history.pushState(null, 'main', '/')
       return
     }
     history.pushState(null, item.activeRule, item.activeRule)
     this.current = item.activeRule
-   }
+  }
 
-  editStore(){
-    actions.setGlobalState({mainuser:this.value});
+  editStore() {
+    actions.setGlobalState({ mainuser: this.value });
     this.current = '/sub-angular'
     this.router.navigate(['/sub-angular'])
-    }
+  }
 
-   edit(){
-     actions.setGlobalState({ mainuser: this.value });
-     }
+  edit() {
+    actions.setGlobalState({ mainuser: this.value });
+  }
 }
