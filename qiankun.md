@@ -1131,7 +1131,7 @@ send(){
 
 ### [场景 2：主应用和微应用部署在不同的服务器，使用 Nginx 代理访问](https://qiankun.umijs.org/zh/cookbook#%E5%9C%BA%E6%99%AF-2%E4%B8%BB%E5%BA%94%E7%94%A8%E5%92%8C%E5%BE%AE%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8-nginx-%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE)
 
-
+Nginx 本地部署请参考项目中的nginx.conf文件
 
 ## 四子应用独立仓库后聚合管 理
 
