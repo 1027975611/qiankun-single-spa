@@ -1155,6 +1155,8 @@ send(){
       </style>
       ```
 
+      
+
 ## 三 打包部署 
 
 ### [场景 1：主应用和微应用部署到同一个服务器（同一个 IP 和端口）](https://qiankun.umijs.org/zh/cookbook#%E5%9C%BA%E6%99%AF-1%E4%B8%BB%E5%BA%94%E7%94%A8%E5%92%8C%E5%BE%AE%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8C%E4%B8%80%E4%B8%AA-ip-%E5%92%8C%E7%AB%AF%E5%8F%A3)
@@ -1163,11 +1165,70 @@ send(){
 
 
 
+## 四子应用独立仓库后聚合管理
 
+##### 单纯地将所有子仓库放到聚合目录下并`.gitignore`掉。
+
+聚合库使用 `npm-run-all`一键install和一键启动整个项目，我们参考qiankun的examples的使用方法
+
+        1.  聚合库安装`npmi npm-run-all -D`
+        2.  聚合库的package.json 增加命令
+
+
+```json
+"scripts": {
+        "clone": "npm-run-all --serial clone:*",
+        "clone:sub-vue": "cd subapp && git clone https://xxx//sub-vue3.git",
+        "clone:sub-react": "cd subapp && git clone https://xxx//sub-react.git",
+        "clone:sub-angular": "cd subapp && git clone https://xxx//sub-angular.git",
+        "clone:sub-html": "cd subapp && git clone https://xxx//sub-html.git",
+        "install": "npm-run-all --serial install:*",
+        "install:main": "cd main && npm i",
+        "install:sub-vue": "cd subapp &&cd sub-vue3 && npm i",
+        "install:sub-react": "cd subapp &&cd sub-react && npm i",
+        "install:sub-angular": "cd subapp &&cd sub-angular && npm i",
+        "install:sub-html": "cd subapp &&cd sub-html && npm i",
+        "start": "npm-run-all --parallel start:*",
+        "start:sub-react": "cd subapp &&cd sub-react && npm start",
+        "start:sub-vue": "cd subapp &&cd sub-vue3 && npm start",
+        "start:main": "cd main && npm start",
+        "start:sub-angular": "cd subapp &&cd sub-angular && npm run start:single-spa:sub-angular",
+        "start:sub-html": "cd subapp &&cd sub-html && npm start",
+        "build": "npm-run-all build:* && bash ./scripts/bundle.sh",
+        "build:sub-angular": "cd subapp &&cd sub-angular && npm run build:single-spa:sub-angular",
+        "build:sub-react": "cd subapp &&cd sub-react && npm run build",
+        "build:sub-vue": "cd subapp &&cd sub-vue3 && npm run build",
+        "build:sub-html": "cd subapp &&cd sub-html && npm run build",
+        "build:main": "cd main && npm run build",
+        "checkout": "npm-run-all --serial checkout:*",
+        "checkout:sub-vue3": "cd subapp && cd sub-vue3 && git checkout master",
+        "checkout:sub-react": "cd subapp && cd sub-react && git checkout master",
+        "checkout:sub-angular": "cd subapp && cd sub-angular && git checkout master",
+        "checkout:sub-html": "cd subapp && cd sub-html && git checkout master",
+        "pull": "npm-run-all --parallel pull:*",
+        "pull:main": "git pull",
+        "pull:sub-vue3": "cd subapp && cd sub-vue3 && git pull",
+        "pull:sub-react": "cd subapp && cd sub-react && git pull",
+        "pull:sub-angular": "cd subapp && cd sub-angular && git pull",
+        "pull:sub-html": "cd subapp && cd sub-html && git pull"
+    },
+```
+
+
+
+## 五其他问题
 
 ##### [qiankun上线稳定，问题解决汇总](https://www.shouxicto.com/article/4005.html)
 
 [1：`boax-sizing` 样式污染 。2：`子应用播放器报错`,](https://juejin.cn/post/7091594061328580645)
+
+
+
+[本文参考文档](https://cloud.tencent.com/developer/article/1880214)
+
+
+
+
 
 
 
