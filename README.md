@@ -8,6 +8,12 @@ qiankun 实战 demo，父应用 Angular，子应用使用 `angular` `react`, `vu
 ```
 npm i
 ```
+
+安装子应用
+```
+npm run clone
+```
+
 一键安装所有主子应用的依赖
 ```
 npm run install
@@ -17,7 +23,7 @@ npm run install
 ```
 npm start
 ```
-
+本地
 通过 [http://localhost:7400/](http://localhost:7400/) 访问主应用。
 也可单独访问独立的子应用 子应用端口号: 
 angular [http://localhost:7401/](http://localhost:7401/)
