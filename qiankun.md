@@ -1165,10 +1165,10 @@ send(){
 
 
 
-## 四子应用独立仓库后聚合管理
+## 四子应用独立仓库后聚合管 理
 
 ##### 单纯地将所有子仓库放到聚合目录下并`.gitignore`掉。
-
+请参考 [test](https://github.com/1027975611/qiankun-single-spa/tree/test) 分支
 聚合库使用 `npm-run-all`一键install和一键启动整个项目，我们参考qiankun的examples的使用方法
 
         1.  聚合库安装`npmi npm-run-all -D`
