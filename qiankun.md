@@ -1,38 +1,6 @@
 # [qiankun](https://link.zhihu.com/?target=https%3A//github.com/umijs/qiankun)
-
-`qiankun`是由蚂蚁金服推出的基于[Single-Spa](https://link.zhihu.com/?target=https%3A//github.com/single-spa/single-spa)实现的前端微服务框架，本质上还是**路由分发式**的服务框架，不同于原本 Single-Spa 采用 JS Entry 加载子应用的方案，qiankun 采用 HTML Entry 方式进行了替代优化。
-
-**`JS Entry`的使用限制要求**：
-
-- 限制一个 JS 入口文件
-- 图片、CSS 等静态资源需要打包到 JS 里
-- Code Splitting 无法应用
-
-
-对比 JS Entry， HTML Entry 使用就方便太多了，项目配置给定入口文件后，qiankun 会自行 Fetch 请求资源，解析出 JS 和 CSS 文件资源后，插入到给定的容器中，完美～
-
-> JS Entry 的方式通常是子应用将资源打成一个 Entry Script， 类似 Single-Spa 的 [例子](https://link.zhihu.com/?target=https%3A//github.com/joeldenning/simple-single-spa-webpack-example/blob/master/src/root-application/root-application.js)；
->
-> HTML Entry 则是使用 HTML 格式进行子应用资源的组织，主应用通过 Fetch html 的方式获取子应用的静态资源，同时将 HTML Document 作为子节点塞到主应用的容器中。可读性和维护性更高，更接近最后页面挂载后的效果，也不存在需要双向转义的问题。
-
-##### 微前端架构具备以下几个核心价值：
-
-- 技术栈无关
-  主框架不限制接入应用的技术栈，微应用具备完全自主权
-
-- 独立开发、独立部署
-  微应用仓库独立，前后端可独立开发，部署完成后主框架自动完成同步更新
-
-- 增量升级
-
-  在面对各种复杂场景时，我们通常很难对一个已经存在的系统做全量的技术栈升级或重构，而微前端是一种非常好的实施渐进式重构的手段和策略
-
-- 独立运行时
-  每个微应用之间状态隔离，运行时状态不共享
-
-
+[使用umi创建项目](https://umijs.org/)
 qiankun 官方 demo 地址：https://github.com/umijs/qiankun
-
 本文demo 地址： https://github.com/1027975611/qiankun-single-spa
 
 ## 一、创建及配置基座项目
@@ -1225,7 +1193,6 @@ send(){
 
 
 [本文参考文档](https://cloud.tencent.com/developer/article/1880214)
-
 
 
 
