@@ -6,22 +6,22 @@ qiankun 实战 demo，父应用 Angular，子应用使用 `angular` `react`, `vu
 ## 开始
 安装根目录工程依赖
 ```
-npm i
+yarn 
 ```
 
 安装子应用
 ```
-npm run clone
+yarn clone
 ```
 
 一键安装所有主子应用的依赖
 ```
-npm run install
+yarn install
 ```
 
 一键启动所有所有应用
 ```
-npm start
+yarn start
 ```
 本地
 通过 [http://localhost:7400/](http://localhost:7400/) 访问主应用。
@@ -34,6 +34,6 @@ html [http://localhost:7404/](http://localhost:7404/)
 ## 发布
 一键构建并打包所有主子应用
 ```
-npm run build
+yarn build
 ```
 
